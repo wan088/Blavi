@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCA9BDA9285EE2F242086CB8 /* Pods_Blavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAECE54937B06F071A2128F /* Pods_Blavi.framework */; };
 		CCE846A72327FC330089826F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A62327FC330089826F /* AppDelegate.swift */; };
 		CCE846A92327FC330089826F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A82327FC330089826F /* ViewController.swift */; };
 		CCE846AC2327FC330089826F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCE846AA2327FC330089826F /* Main.storyboard */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		048CCC38A13C684518DEC77B /* Pods-Blavi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blavi.debug.xcconfig"; path = "Target Support Files/Pods-Blavi/Pods-Blavi.debug.xcconfig"; sourceTree = "<group>"; };
+		3DAECE54937B06F071A2128F /* Pods_Blavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE846A32327FC330089826F /* Blavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE846A62327FC330089826F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCE846A82327FC330089826F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		CCE846B02327FC340089826F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCE846B32327FC340089826F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCE846B52327FC340089826F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F82215D32FA56CE47F26F2AA /* Pods-Blavi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blavi.release.xcconfig"; path = "Target Support Files/Pods-Blavi/Pods-Blavi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA9BDA9285EE2F242086CB8 /* Pods_Blavi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B299155BC711005FB6D28E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DAECE54937B06F071A2128F /* Pods_Blavi.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CCE8469A2327FC330089826F = {
 			isa = PBXGroup;
 			children = (
 				CCE846A52327FC330089826F /* Blavi */,
 				CCE846A42327FC330089826F /* Products */,
+				FF6221ABC84E45CC509025BA /* Pods */,
+				7B299155BC711005FB6D28E9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +82,16 @@
 			path = Blavi;
 			sourceTree = "<group>";
 		};
+		FF6221ABC84E45CC509025BA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				048CCC38A13C684518DEC77B /* Pods-Blavi.debug.xcconfig */,
+				F82215D32FA56CE47F26F2AA /* Pods-Blavi.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCE846B82327FC340089826F /* Build configuration list for PBXNativeTarget "Blavi" */;
 			buildPhases = (
+				DE3BC186364C6546DE21CFB1 /* [CP] Check Pods Manifest.lock */,
 				CCE8469F2327FC330089826F /* Sources */,
 				CCE846A02327FC330089826F /* Frameworks */,
 				CCE846A12327FC330089826F /* Resources */,
+				E9505557CF426EEA9616F509 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DE3BC186364C6546DE21CFB1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Blavi-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9505557CF426EEA9616F509 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blavi/Pods-Blavi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Blavi/Pods-Blavi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Blavi/Pods-Blavi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CCE8469F2327FC330089826F /* Sources */ = {
@@ -284,6 +353,7 @@
 		};
 		CCE846B92327FC340089826F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 048CCC38A13C684518DEC77B /* Pods-Blavi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -293,6 +363,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/[iOS]TmapSDK_1.44/lib",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = net.wan.Blavi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -302,6 +377,7 @@
 		};
 		CCE846BA2327FC340089826F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F82215D32FA56CE47F26F2AA /* Pods-Blavi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -311,6 +387,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/[iOS]TmapSDK_1.44/lib",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = net.wan.Blavi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
