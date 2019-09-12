@@ -10,7 +10,7 @@
 		CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4232A8232A330F004B97F0 /* Search_Result.swift */; };
 		CCA9BDA9285EE2F242086CB8 /* Pods_Blavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAECE54937B06F071A2128F /* Pods_Blavi.framework */; };
 		CCE846A72327FC330089826F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A62327FC330089826F /* AppDelegate.swift */; };
-		CCE846A92327FC330089826F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A82327FC330089826F /* ViewController.swift */; };
+		CCE846A92327FC330089826F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A82327FC330089826F /* MasterViewController.swift */; };
 		CCE846AC2327FC330089826F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCE846AA2327FC330089826F /* Main.storyboard */; };
 		CCE846AF2327FC330089826F /* Blavi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCE846AD2327FC330089826F /* Blavi.xcdatamodeld */; };
 		CCE846B12327FC340089826F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCE846B02327FC340089826F /* Assets.xcassets */; };
@@ -23,7 +23,7 @@
 		CC4232A8232A330F004B97F0 /* Search_Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_Result.swift; sourceTree = "<group>"; };
 		CCE846A32327FC330089826F /* Blavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE846A62327FC330089826F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CCE846A82327FC330089826F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CCE846A82327FC330089826F /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		CCE846AB2327FC330089826F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CCE846AE2327FC330089826F /* Blavi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blavi.xcdatamodel; sourceTree = "<group>"; };
 		CCE846B02327FC340089826F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				CCE846A62327FC330089826F /* AppDelegate.swift */,
-				CCE846A82327FC330089826F /* ViewController.swift */,
+				CCE846A82327FC330089826F /* MasterViewController.swift */,
 				CCE846AA2327FC330089826F /* Main.storyboard */,
 				CCE846B02327FC340089826F /* Assets.xcassets */,
 				CCE846B22327FC340089826F /* LaunchScreen.storyboard */,
@@ -209,7 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE846A92327FC330089826F /* ViewController.swift in Sources */,
+				CCE846A92327FC330089826F /* MasterViewController.swift in Sources */,
 				CCE846A72327FC330089826F /* AppDelegate.swift in Sources */,
 				CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */,
 				CCE846AF2327FC330089826F /* Blavi.xcdatamodeld in Sources */,
