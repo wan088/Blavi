@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4232A8232A330F004B97F0 /* Search_Result.swift */; };
 		CCA9BDA9285EE2F242086CB8 /* Pods_Blavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAECE54937B06F071A2128F /* Pods_Blavi.framework */; };
 		CCE846A72327FC330089826F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A62327FC330089826F /* AppDelegate.swift */; };
 		CCE846A92327FC330089826F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A82327FC330089826F /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		048CCC38A13C684518DEC77B /* Pods-Blavi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blavi.debug.xcconfig"; path = "Target Support Files/Pods-Blavi/Pods-Blavi.debug.xcconfig"; sourceTree = "<group>"; };
 		3DAECE54937B06F071A2128F /* Pods_Blavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC4232A8232A330F004B97F0 /* Search_Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_Result.swift; sourceTree = "<group>"; };
 		CCE846A32327FC330089826F /* Blavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE846A62327FC330089826F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCE846A82327FC330089826F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				CCE846B22327FC340089826F /* LaunchScreen.storyboard */,
 				CCE846B52327FC340089826F /* Info.plist */,
 				CCE846AD2327FC330089826F /* Blavi.xcdatamodeld */,
+				CC4232A8232A330F004B97F0 /* Search_Result.swift */,
 			);
 			path = Blavi;
 			sourceTree = "<group>";
@@ -88,7 +91,6 @@
 				048CCC38A13C684518DEC77B /* Pods-Blavi.debug.xcconfig */,
 				F82215D32FA56CE47F26F2AA /* Pods-Blavi.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -209,6 +211,7 @@
 			files = (
 				CCE846A92327FC330089826F /* ViewController.swift in Sources */,
 				CCE846A72327FC330089826F /* AppDelegate.swift in Sources */,
+				CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */,
 				CCE846AF2327FC330089826F /* Blavi.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

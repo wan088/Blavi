@@ -45,5 +45,7 @@
 	<string>위치정보를 사용합니다.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>백그라운드 위치정보를 사용합니다.</string>
+	<key>NMFClientId</key>
+	<string>xxp3z85qgy</string>
 </dict>
 </plist>
