@@ -7,10 +7,11 @@
 //
 import MapKit
 import UIKit
-import NMapsMap
-class MasterViewController: UIViewController, CLLocationManagerDelegate{
+class SearchViewController: UIViewController, CLLocationManagerDelegate{
+    
     var places: [Place] = [Place]()
     var locationManager: CLLocationManager?
+    
     @IBOutlet var ResultTableView: UITableView!
     @IBOutlet var SearchTF: UITextField!
     @IBOutlet var SearchBtn: UIButton!
@@ -32,10 +33,7 @@ class MasterViewController: UIViewController, CLLocationManagerDelegate{
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
-    }
-    func getCurrentLocation() -> String{
-        
-        return "127.1054328,37.3595963"
+        locationManager?.startUpdatingHeading()
     }
     func fillTableView(keyword: String){
         let Search_Keyword = SearchTF.text!
@@ -78,7 +76,7 @@ class MasterViewController: UIViewController, CLLocationManagerDelegate{
         task.resume()
     }
 }
-extension MasterViewController: UITableViewDataSource{
+extension SearchViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(places.count)
         return self.places.count
@@ -91,7 +89,13 @@ extension MasterViewController: UITableViewDataSource{
         return cell
     }
 }
-extension MasterViewController: UITextFieldDelegate{
+extension SearchViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.storyboard?.instantiateViewController(withIdentifier: "mapVC")
+        
+    }
+}
+extension SearchViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let text = SearchTF.text{
             if(text != ""){
