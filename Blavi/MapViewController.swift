@@ -12,20 +12,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var destinName: UILabel!
     @IBOutlet var Status: UILabel!
     
-    @IBOutlet var tmpLabel: UILabel!
     
-    @IBOutlet var currentLocationTf: UITextField!
+    @IBOutlet var currentX_TF: UITextField!
+    @IBOutlet var currentY_TF: UITextField!
     @IBOutlet var currentHeadingTf: UITextField!
     
     @IBOutlet var restNode: UITextField!
     
-    @IBOutlet var nextNodeTf: UITextField!
+    @IBOutlet var nextNodeX_Tf: UITextField!
+    @IBOutlet var nextNodeY_Tf: UITextField!
     @IBOutlet var nextNodeHeadingTf: UITextField!
     
     var currentLocation: CLLocation?
     var currentHeading: CLHeading?
     var nodes: [CLLocation] = [CLLocation]()
     
+    var destinNameString: String?
     var startX = ""
     var startY = ""
     var endX = ""
@@ -37,7 +39,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let RouteSearchUrlString = "https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1"
     @IBAction func findRoute(_ sender: Any) {
         guard let url = URL(string: RouteSearchUrlString) else {return}
-        self.tmpLabel.text = "startX : \(startX)\n startY :\(startY) \n \(endX),\n \(endY)"
         
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "accept")
@@ -79,7 +80,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     
                     self.nextNode_Idx = 0
                     DispatchQueue.main.async {
-                        self.isEditing = true
                         self.startNavigation()
                         
                     }
@@ -92,27 +92,50 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func startNavigation(){
         self.restNode.text = "\(self.nextNode_Idx+1) / \(self.nodes.count)개"
         let nextL = self.nodes[nextNode_Idx]
-        self.nextNodeTf.text = "\(nextL.coordinate.latitude),\(nextL.coordinate.longitude)"
+        self.nextNodeX_Tf.text = "\(nextL.coordinate.longitude)"
+        self.nextNodeY_Tf.text = "\(nextL.coordinate.latitude)"
         self.Status.textColor = .red
         self.Status.text = "동작중"
+        self.isStarted = true
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {return}
         self.currentLocation = location
-        self.currentLocationTf.text = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
-        if self.isStarted{
-            updateNavigation()
-        }
+        self.currentX_TF.text = "\(location.coordinate.longitude)"
+        self.currentY_TF.text = "\(location.coordinate.latitude)"
+        
     }
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.currentHeading = newHeading
         self.currentHeadingTf.text = "\(newHeading.magneticHeading)"
+        if self.isStarted{
+            updateNavigation()
+        }
     }
     func updateNavigation(){
-        self.currentLocation
+        guard let from = self.currentLocation else {return}
+        let to = CLLocation(latitude: Double(self.endY)!, longitude: Double(self.endX)!)
+        let angle1_string = String(describing: (self.currentHeading?.magneticHeading)!)
+        print(angle1_string)
+        let angle1 = (Double(angle1_string))!
+        let angle2 = getAngle(from: from, to: to)
+        self.nextNodeHeadingTf.text = "\(angle1-angle2)"
+    }
+    func getAngle(from: CLLocation, to: CLLocation)->Double{
+        var result = atan2(to.coordinate.longitude - from.coordinate.longitude , to.coordinate.latitude - to.coordinate.longitude)
+        result = (result/Double.pi)*180
+        return result
+    }
+    func initViews(){
+        
+        self.currentX_TF.text = self.startY
+        self.currentY_TF.text = self.startX
+        self.destinName.text = self.destinNameString
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initViews()
+        
     }
 }
