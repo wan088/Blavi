@@ -114,9 +114,17 @@
                                 </constraints>
                                 <state key="normal" title="찾기 시작"/>
                                 <connections>
+                                    <action selector="findRoute:" destination="qXn-3m-oXw" eventType="touchUpInside" id="19S-5T-14s"/>
                                     <action selector="findRoute:" destination="tSn-eC-ZkC" eventType="touchUpInside" id="lmW-og-ORi"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nC-u5-p4J">
+                                <rect key="frame" x="95" y="263" width="225" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -126,6 +134,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6nQ-4Z-zSw"/>
                     </view>
+                    <connections>
+                        <outlet property="tmpLabel" destination="3nC-u5-p4J" id="rtl-Jn-g45"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ogz-as-09G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="tSn-eC-ZkC" userLabel="Exit" sceneMemberID="exit"/>

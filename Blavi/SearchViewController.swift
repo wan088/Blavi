@@ -25,6 +25,7 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ResultTableView.dataSource = self
+        self.ResultTableView.delegate = self
         SearchTF.delegate = self
         initLocationManager()
     }
@@ -35,15 +36,19 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
         locationManager?.startUpdatingLocation()
         locationManager?.startUpdatingHeading()
     }
-    func fillTableView(keyword: String){
-        let Search_Keyword = SearchTF.text!
+    func getCurrentLocation()->CLLocationCoordinate2D?{
         guard let Current_Location = locationManager?.location?.coordinate else{
             let alert = UIAlertController(title: "위치확인 오류", message: "현재 위치를 확인할 수 없습니다.", preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .cancel)
             alert.addAction(ok)
             self.present(alert, animated: true)
-            return
+            return nil
         }
+        return Current_Location
+    }
+    func fillTableView(keyword: String){
+        let Search_Keyword = SearchTF.text!
+        guard let Current_Location = getCurrentLocation() else {return}
         
         let urlString = "https://naveropenapi.apigw.ntruss.com/map-place/v1/search?query=\(Search_Keyword)&coordinate=\(Current_Location.longitude),\(Current_Location.latitude)".addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         guard let url = URL(string:urlString) else{
@@ -91,7 +96,16 @@ extension SearchViewController: UITableViewDataSource{
 }
 extension SearchViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.storyboard?.instantiateViewController(withIdentifier: "mapVC")
+        let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! MapViewController
+        mapVC.endX = self.places[indexPath.row].x
+        mapVC.endY = self.places[indexPath.row].y
+        let currentLocation = getCurrentLocation()
+        mapVC.startX = currentLocation?.longitude.description ?? ""
+        mapVC.startY = currentLocation?.latitude.description ?? ""
+        print("??")
+        
+        self.navigationController?.pushViewController(mapVC, animated: true)
+        tableView.cellForRow(at: indexPath)?.isSelected = false
         
     }
 }

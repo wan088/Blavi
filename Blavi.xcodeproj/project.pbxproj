@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		CCE846B12327FC340089826F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCE846B02327FC340089826F /* Assets.xcassets */; };
 		CCE846B42327FC340089826F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCE846B22327FC340089826F /* LaunchScreen.storyboard */; };
 		CCEED6A4233B76D400404A72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEED6A3233B76D400404A72 /* MapViewController.swift */; };
+		CCF5F907233B87D900284AF4 /* FeatureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF5F906233B87D900284AF4 /* FeatureCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		CCE846B32327FC340089826F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCE846B52327FC340089826F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCEED6A3233B76D400404A72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CCF5F906233B87D900284AF4 /* FeatureCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCollection.swift; sourceTree = "<group>"; };
 		F82215D32FA56CE47F26F2AA /* Pods-Blavi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blavi.release.xcconfig"; path = "Target Support Files/Pods-Blavi/Pods-Blavi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 				CCEED6A3233B76D400404A72 /* MapViewController.swift */,
 				CCE846AA2327FC330089826F /* Main.storyboard */,
 				CCE846B02327FC340089826F /* Assets.xcassets */,
+				CCF5F906233B87D900284AF4 /* FeatureCollection.swift */,
 				CCE846B22327FC340089826F /* LaunchScreen.storyboard */,
 				CCE846B52327FC340089826F /* Info.plist */,
 				CCE846AD2327FC330089826F /* Blavi.xcdatamodeld */,
@@ -108,7 +111,6 @@
 				CCE8469F2327FC330089826F /* Sources */,
 				CCE846A02327FC330089826F /* Frameworks */,
 				CCE846A12327FC330089826F /* Resources */,
-				E9505557CF426EEA9616F509 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,23 +190,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9505557CF426EEA9616F509 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Blavi/Pods-Blavi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Blavi/Pods-Blavi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Blavi/Pods-Blavi-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -212,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF5F907233B87D900284AF4 /* FeatureCollection.swift in Sources */,
 				CCE846A92327FC330089826F /* SearchViewController.swift in Sources */,
 				CCE846A72327FC330089826F /* AppDelegate.swift in Sources */,
 				CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */,
