@@ -102,8 +102,9 @@ extension SearchViewController: UITableViewDelegate{
         let currentLocation = getCurrentLocation()
         mapVC.startX = currentLocation?.longitude.description ?? ""
         mapVC.startY = currentLocation?.latitude.description ?? ""
-        print("??")
+        mapVC.destinName.text = self.places[indexPath.row].name
         
+        self.locationManager?.delegate = mapVC
         self.navigationController?.pushViewController(mapVC, animated: true)
         tableView.cellForRow(at: indexPath)?.isSelected = false
         
