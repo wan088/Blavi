@@ -119,7 +119,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         print(angle1_string)
         let angle1 = (Double(angle1_string))!
         let angle2 = getAngle(from: from, to: to)
-        self.nextNodeHeadingTf.text = "\(angle1-angle2)"
+        
+        var nextAngle = (angle1-angle2)
+        nextAngle = nextAngle > 360 ? nextAngle - 360 : nextAngle
+        self.nextNodeHeadingTf.text = "\(nextAngle)"
     }
     func getAngle(from: CLLocation, to: CLLocation)->Double{
         var result = atan2(to.coordinate.longitude - from.coordinate.longitude , to.coordinate.latitude - to.coordinate.longitude)
