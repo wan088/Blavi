@@ -9,8 +9,10 @@
 import UIKit
 import MapKit
 class MapViewController: UIViewController, CLLocationManagerDelegate {
+    
     @IBOutlet var destinName: UILabel!
     @IBOutlet var Status: UILabel!
+    @IBOutlet weak var Status_TV: UITextView!
     
     
     @IBOutlet var currentX_TF: UITextField!
@@ -23,6 +25,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var nextNodeY_Tf: UITextField!
     @IBOutlet var nextNodeHeadingTf: UITextField!
     
+    @IBOutlet weak var nextNodeDistanceTf: UITextField!
     var currentLocation: CLLocation?
     var currentHeading: CLHeading?
     var nodes: [CLLocation] = [CLLocation]()
@@ -81,7 +84,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     self.nextNode_Idx = 0
                     DispatchQueue.main.async {
                         self.startNavigation()
-                        
                     }
                     
                 }
@@ -90,12 +92,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     func startNavigation(){
-        self.restNode.text = "\(self.nextNode_Idx+1) / \(self.nodes.count)개"
-        let nextL = self.nodes[nextNode_Idx]
-        self.nextNodeX_Tf.text = "\(nextL.coordinate.longitude)"
-        self.nextNodeY_Tf.text = "\(nextL.coordinate.latitude)"
+        updateNextNode()
         self.Status.textColor = .red
         self.Status.text = "동작중"
+        
+        self.Status_TV.text = "길찾기 시작... \n"
         self.isStarted = true
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -103,7 +104,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.currentLocation = location
         self.currentX_TF.text = "\(location.coordinate.longitude)"
         self.currentY_TF.text = "\(location.coordinate.latitude)"
-        
+        if self.isStarted{
+            let meter = location.distance(from: nodes[nextNode_Idx]);
+            self.nextNodeDistanceTf.text = "\(Int(meter))m"
+            if(meter < 10){
+                self.nextNode_Idx+=1
+                updateNextNode()
+                if(nextNode_Idx == nodes.count){
+                    stopNavigation()
+                }
+            }
+        }
+    }
+    func updateNextNode(){
+        self.Status_TV.text += "\(self.nextNode_Idx) 번째 노드 도착...\n"
+        self.restNode.text = "\(self.nextNode_Idx) / \(self.nodes.count)개"
+        let nextL = self.nodes[nextNode_Idx]
+        self.nextNodeX_Tf.text = "\(nextL.coordinate.longitude)"
+        self.nextNodeY_Tf.text = "\(nextL.coordinate.latitude)"
+    }
+    func stopNavigation(){
+        self.Status_TV.text += "길찾기 완료 \n"
+        self.isStarted = false
+        self.Status.textColor = .green
+        self.Status.text = "완료"
+        self.restNode.text = ""
+        self.nextNodeX_Tf.text = ""
+        self.nextNodeY_Tf.text = ""
+        self.nextNodeHeadingTf.text = ""
     }
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.currentHeading = newHeading
@@ -114,7 +142,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     func updateNavigation(){
         guard let from = self.currentLocation else {return}
-        let to = CLLocation(latitude: Double(self.endY)!, longitude: Double(self.endX)!)
+        let to = nodes[nextNode_Idx]
         let angle1_string = String(describing: (self.currentHeading?.magneticHeading)!)
         print(angle1_string)
         let angle1 = (Double(angle1_string))!
@@ -125,7 +153,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.nextNodeHeadingTf.text = "\(nextAngle)"
     }
     func getAngle(from: CLLocation, to: CLLocation)->Double{
-        var result = atan2(to.coordinate.longitude - from.coordinate.longitude , to.coordinate.latitude - to.coordinate.longitude)
+        
+        var result = atan2(to.coordinate.longitude - from.coordinate.longitude , to.coordinate.latitude - to.coordinate.latitude)
         result = (result/Double.pi)*180
         return result
     }
@@ -134,6 +163,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.currentX_TF.text = self.startY
         self.currentY_TF.text = self.startX
         self.destinName.text = self.destinNameString
+        self.Status_TV.layer.borderWidth = 1
+        self.Status_TV.layer.borderColor = UIColor.gray.cgColor
         
     }
     override func viewDidLoad() {
@@ -141,4 +172,5 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         initViews()
         
     }
+
 }

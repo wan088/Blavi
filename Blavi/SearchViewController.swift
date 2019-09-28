@@ -7,6 +7,7 @@
 //
 import MapKit
 import UIKit
+import RxSwift
 class SearchViewController: UIViewController, CLLocationManagerDelegate{
     
     var places: [Place] = [Place]()
@@ -16,11 +17,30 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet var SearchTF: UITextField!
     @IBOutlet var SearchBtn: UIButton!
     @IBAction func SearchTouch(_ sender: Any) {
-        if let text = SearchTF.text{
-            if(text != ""){
-                fillTableView(keyword: text)
+        guard let text = SearchTF.text else{return}
+        guard let location = locationManager?.location else {return}
+        if(text == ""){return}
+        _ = rxSwiftGetLocations(keyword: text, location: location).observeOn(MainScheduler.instance).subscribe { (event) in
+            switch event{
+            case let .next(data):
+                self.fillTableView(data: data);
+            case let .error(error):
+                print(error.localizedDescription)
+            case .completed:
+                break
             }
         }
+        
+    }
+    func rxSwiftGetLocations(keyword: String, location:CLLocation) -> Observable<Data>{
+        return Observable<Data>.create { (observer) -> Disposable in
+            getResults(currentLocation: location, keyword: keyword) { (data) in
+                observer.onNext(data)
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,49 +56,14 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
         locationManager?.startUpdatingLocation()
         locationManager?.startUpdatingHeading()
     }
-    func getCurrentLocation()->CLLocationCoordinate2D?{
-        guard let Current_Location = locationManager?.location?.coordinate else{
-            let alert = UIAlertController(title: "위치확인 오류", message: "현재 위치를 확인할 수 없습니다.", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "확인", style: .cancel)
-            alert.addAction(ok)
-            self.present(alert, animated: true)
-            return nil
+    func fillTableView(data: Data){
+        do{
+            let w = try JSONDecoder().decode(Search_Result.self, from: data)
+            self.places = w.places
+            self.ResultTableView.reloadData()
+        }catch{
+            print("Decode Error")
         }
-        return Current_Location
-    }
-    func fillTableView(keyword: String){
-        let Search_Keyword = SearchTF.text!
-        guard let Current_Location = getCurrentLocation() else {return}
-        
-        let urlString = "https://naveropenapi.apigw.ntruss.com/map-place/v1/search?query=\(Search_Keyword)&coordinate=\(Current_Location.longitude),\(Current_Location.latitude)".addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
-        guard let url = URL(string:urlString) else{
-            print("Error : Wrong URL")
-            return
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.addValue("xxp3z85qgy", forHTTPHeaderField: "X-NCP-APIGW-API-KEY-ID")
-        request.addValue("OlejTqWkxVCIkrAj3nWf6a3jtVrvvlQNO0u4CdRh", forHTTPHeaderField: "X-NCP-APIGW-API-KEY")
-        
-        
-        let task = URLSession.shared.dataTask(with: request){(data, response, error) in
-            if let e = error{
-                print("Error :",e.localizedDescription)
-                return
-            }
-            DispatchQueue.main.async {
-                let w: Search_Result
-                do{
-                    w = try JSONDecoder().decode(Search_Result.self, from: data!)
-                    self.places = w.places
-                    self.ResultTableView.reloadData()
-                }catch{
-                    print("Decode Error")
-                }
-                
-            }
-        }
-        task.resume()
     }
 }
 extension SearchViewController: UITableViewDataSource{
@@ -99,9 +84,9 @@ extension SearchViewController: UITableViewDelegate{
         let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! MapViewController
         mapVC.endX = self.places[indexPath.row].x
         mapVC.endY = self.places[indexPath.row].y
-        let currentLocation = getCurrentLocation()
-        mapVC.startX = currentLocation?.longitude.description ?? ""
-        mapVC.startY = currentLocation?.latitude.description ?? ""
+        let currentLocation = locationManager?.location
+        mapVC.startX = currentLocation?.coordinate.longitude.description ?? ""
+        mapVC.startY = currentLocation?.coordinate.latitude.description ?? ""
         mapVC.destinNameString = self.places[indexPath.row].name
         
         self.locationManager?.delegate = mapVC
@@ -112,11 +97,7 @@ extension SearchViewController: UITableViewDelegate{
 }
 extension SearchViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let text = SearchTF.text{
-            if(text != ""){
-                fillTableView(keyword: text)
-            }
-        }
+        self.SearchTouch(self)
         textField.resignFirstResponder()
         return true
     }
