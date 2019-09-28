@@ -32,16 +32,7 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
         }
         
     }
-    func rxSwiftGetLocations(keyword: String, location:CLLocation) -> Observable<Data>{
-        return Observable<Data>.create { (observer) -> Disposable in
-            getResults(currentLocation: location, keyword: keyword) { (data) in
-                observer.onNext(data)
-                observer.onCompleted()
-            }
-            return Disposables.create()
-        }
-        
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ResultTableView.dataSource = self
@@ -84,9 +75,9 @@ extension SearchViewController: UITableViewDelegate{
         let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! MapViewController
         mapVC.endX = self.places[indexPath.row].x
         mapVC.endY = self.places[indexPath.row].y
-        let currentLocation = locationManager?.location
-        mapVC.startX = "\(currentLocation?.coordinate.longitude)"
-        mapVC.startY = "\(currentLocation?.coordinate.latitude)"
+        guard let currentLocation = locationManager?.location else {return}
+        mapVC.startX = "\(currentLocation.coordinate.longitude)"
+        mapVC.startY = "\(currentLocation.coordinate.latitude)"
         mapVC.destinNameString = self.places[indexPath.row].name
         
         self.locationManager?.delegate = mapVC

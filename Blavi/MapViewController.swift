@@ -39,15 +39,40 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var nextNode_Idx = 0
     var isStarted = false
     
-    let RouteSearchUrlString = "https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1"
-    @IBAction func findRoute(_ sender: Any) {
         
-    }
-    func rxSwiftGetNodes() -> Observable<Data>{
-        return Observable.create { (observer) -> Disposable in
-            return
+    @IBAction func findRoute(_ sender: Any) {
+        _ = rxSwiftGetNodes(startX: startX, startY: startY, endX: endX, endY: endY).observeOn(MainScheduler.instance).subscribe { (event) in
+            switch event{
+            case let .next(data):
+                self.initNodes(data: data)
+            case let .error(error):
+                print(error.localizedDescription)
+            case let .completed:
+                break
+            }
         }
     }
+    func initNodes(data: Data){
+            let featureCollection = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
+            print(featureCollection.description)
+            let feats = featureCollection["features"] as! [[String: Any]]
+        
+            for tmp in feats{
+                let feat = tmp as! [String:Any]
+                let geo = feat["geometry"] as! [String: Any]
+                if geo["type"] as! String == "LineString"{
+                    continue
+                }
+                let coors = geo["coordinates"] as! NSArray
+                let lat = coors[1] as! CFNumber
+                let long = coors[0] as! CFNumber
+                
+                self.nodes.append(CLLocation(latitude: Double(lat), longitude: Double(long) ))
+                self.nextNode_Idx = 0
+                self.startNavigation()
+            }
+    }
+
     func startNavigation(){
         updateNextNode()
         self.Status.textColor = .red
@@ -129,6 +154,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initViews()
         
     }
