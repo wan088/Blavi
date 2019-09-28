@@ -85,8 +85,8 @@ extension SearchViewController: UITableViewDelegate{
         mapVC.endX = self.places[indexPath.row].x
         mapVC.endY = self.places[indexPath.row].y
         let currentLocation = locationManager?.location
-        mapVC.startX = currentLocation?.coordinate.longitude.description ?? ""
-        mapVC.startY = currentLocation?.coordinate.latitude.description ?? ""
+        mapVC.startX = "\(currentLocation?.coordinate.longitude)"
+        mapVC.startY = "\(currentLocation?.coordinate.latitude)"
         mapVC.destinNameString = self.places[indexPath.row].name
         
         self.locationManager?.delegate = mapVC

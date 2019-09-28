@@ -6,5 +6,9 @@
 //  Copyright © 2019 Yongwan. All rights reserved.
 //
 
+
 import UIKit
 import MapKit
+protocol NavigationDelegate: CLLocationManagerDelegate{
+    
+}

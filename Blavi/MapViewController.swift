@@ -8,12 +8,12 @@
 
 import UIKit
 import MapKit
+import RxSwift
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var destinName: UILabel!
     @IBOutlet var Status: UILabel!
     @IBOutlet weak var Status_TV: UITextView!
-    
     
     @IBOutlet var currentX_TF: UITextField!
     @IBOutlet var currentY_TF: UITextField!
@@ -24,8 +24,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var nextNodeX_Tf: UITextField!
     @IBOutlet var nextNodeY_Tf: UITextField!
     @IBOutlet var nextNodeHeadingTf: UITextField!
-    
     @IBOutlet weak var nextNodeDistanceTf: UITextField!
+    
     var currentLocation: CLLocation?
     var currentHeading: CLHeading?
     var nodes: [CLLocation] = [CLLocation]()
@@ -41,55 +41,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let RouteSearchUrlString = "https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1"
     @IBAction func findRoute(_ sender: Any) {
-        guard let url = URL(string: RouteSearchUrlString) else {return}
         
-        var request = URLRequest(url: url)
-        request.addValue("application/json", forHTTPHeaderField: "accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("e63a4c30-d4cd-4cee-bac8-f5c55a0e9ce9", forHTTPHeaderField: "appKey")
-        
-        let jsonData: [String: Any] = [
-            "startX" : startX,
-            "startY" : startY,
-            "endX" : endX,
-            "endY" : endY,
-            "startName" : "start",
-            "endName" : "end",
-        ]
-        
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONSerialization.data(withJSONObject: jsonData, options: [])
-        
-        URLSession.shared.dataTask(with: request) { (data, res, error) in
-            
-            if let data = data{
-                //print(String(data: data, encoding: .utf8))
-                
-                //let featureCollection = try! JSONDecoder().decode(FeatureCollection.self, from: data)
-                let featureCollection = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-                let feats = featureCollection["features"] as! [[String: Any]]
-            
-                for tmp in feats{
-                    let feat = tmp as! [String:Any]
-                    let geo = feat["geometry"] as! [String: Any]
-                    if geo["type"] as! String == "LineString"{
-                        continue
-                    }
-                    let coors = geo["coordinates"] as! NSArray
-                    let lat = coors[1] as! CFNumber
-                    let long = coors[0] as! CFNumber
-                    
-                    self.nodes.append(CLLocation(latitude: Double(lat), longitude: Double(long) ))
-                    
-                    self.nextNode_Idx = 0
-                    DispatchQueue.main.async {
-                        self.startNavigation()
-                    }
-                    
-                }
-            }
-        }.resume()
-        
+    }
+    func rxSwiftGetNodes() -> Observable<Data>{
+        return Observable.create { (observer) -> Disposable in
+            return
+        }
     }
     func startNavigation(){
         updateNextNode()
@@ -105,14 +62,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.currentX_TF.text = "\(location.coordinate.longitude)"
         self.currentY_TF.text = "\(location.coordinate.latitude)"
         if self.isStarted{
-            let meter = location.distance(from: nodes[nextNode_Idx]);
-            self.nextNodeDistanceTf.text = "\(Int(meter))m"
-            if(meter < 10){
-                self.nextNode_Idx+=1
-                updateNextNode()
-                if(nextNode_Idx == nodes.count){
-                    stopNavigation()
-                }
+            updateDistance(current: location)
+        }
+    }
+    func updateDistance(current: CLLocation){
+        let meter = current.distance(from: nodes[nextNode_Idx]);
+        self.nextNodeDistanceTf.text = "\(Int(meter))m"
+        if(meter < 10){
+            self.nextNode_Idx+=1
+            updateNextNode()
+            if(nextNode_Idx == nodes.count){
+                stopNavigation()
             }
         }
     }
@@ -137,10 +97,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.currentHeading = newHeading
         self.currentHeadingTf.text = "\(newHeading.magneticHeading)"
         if self.isStarted{
-            updateNavigation()
+            setHeadingToGo()
         }
     }
-    func updateNavigation(){
+    func setHeadingToGo(){
         guard let from = self.currentLocation else {return}
         let to = nodes[nextNode_Idx]
         let angle1_string = String(describing: (self.currentHeading?.magneticHeading)!)

@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4232A8232A330F004B97F0 /* Search_Result.swift */; };
 		CC9E129E233F6322000BAA06 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E129D233F6322000BAA06 /* Navigation.swift */; };
-		CC9E12A0233F633F000BAA06 /* NavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E129F233F633F000BAA06 /* NavigationDelegate.swift */; };
 		CC9E12A2233F6504000BAA06 /* MapApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E12A1233F6504000BAA06 /* MapApi.swift */; };
 		CCA9BDA9285EE2F242086CB8 /* Pods_Blavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAECE54937B06F071A2128F /* Pods_Blavi.framework */; };
 		CCE846A72327FC330089826F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A62327FC330089826F /* AppDelegate.swift */; };
@@ -27,7 +26,6 @@
 		3DAECE54937B06F071A2128F /* Pods_Blavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC4232A8232A330F004B97F0 /* Search_Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_Result.swift; sourceTree = "<group>"; };
 		CC9E129D233F6322000BAA06 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
-		CC9E129F233F633F000BAA06 /* NavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDelegate.swift; sourceTree = "<group>"; };
 		CC9E12A1233F6504000BAA06 /* MapApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapApi.swift; sourceTree = "<group>"; };
 		CCE846A32327FC330089826F /* VoiceNavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceNavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE846A62327FC330089826F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				CC9E129D233F6322000BAA06 /* Navigation.swift */,
-				CC9E129F233F633F000BAA06 /* NavigationDelegate.swift */,
 				CC9E12A1233F6504000BAA06 /* MapApi.swift */,
 			);
 			path = Util;
@@ -238,7 +235,6 @@
 				CCE846A72327FC330089826F /* AppDelegate.swift in Sources */,
 				CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */,
 				CCEED6A4233B76D400404A72 /* MapViewController.swift in Sources */,
-				CC9E12A0233F633F000BAA06 /* NavigationDelegate.swift in Sources */,
 				CCE846AF2327FC330089826F /* Blavi.xcdatamodeld in Sources */,
 				CC9E12A2233F6504000BAA06 /* MapApi.swift in Sources */,
 			);
