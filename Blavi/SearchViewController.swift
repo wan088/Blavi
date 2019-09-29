@@ -8,17 +8,26 @@
 import MapKit
 import UIKit
 import RxSwift
+import RxCocoa
+
 class SearchViewController: UIViewController, CLLocationManagerDelegate{
     
     var places: [Place] = [Place]()
-    var locationManager: CLLocationManager?
+    var locationManager: CLLocationManager = {
+        var lm = CLLocationManager()
+        lm.requestWhenInUseAuthorization()
+        lm.startUpdatingLocation()
+        lm.startUpdatingHeading()
+        return lm
+    }()
     
     @IBOutlet var ResultTableView: UITableView!
     @IBOutlet var SearchTF: UITextField!
     @IBOutlet var SearchBtn: UIButton!
+    
     @IBAction func SearchTouch(_ sender: Any) {
         guard let text = SearchTF.text else{return}
-        guard let location = locationManager?.location else {return}
+        guard let location = locationManager.location else {return}
         if(text == ""){return}
         _ = rxSwiftGetLocations(keyword: text, location: location).observeOn(MainScheduler.instance).subscribe { (event) in
             switch event{
@@ -38,14 +47,16 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
         self.ResultTableView.dataSource = self
         self.ResultTableView.delegate = self
         SearchTF.delegate = self
-        initLocationManager()
-    }
-    func initLocationManager(){
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.requestWhenInUseAuthorization()
-        locationManager?.startUpdatingLocation()
-        locationManager?.startUpdatingHeading()
+        self.SearchTF.rx.text.orEmpty.subscribe { (event) in
+            switch event{
+            case let .next(_):
+                self.SearchTouch(self)
+            case let .error(error):
+                print(error.localizedDescription)
+            case .completed:
+                break
+            }
+        }
     }
     func fillTableView(data: Data){
         do{
@@ -75,12 +86,12 @@ extension SearchViewController: UITableViewDelegate{
         let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! MapViewController
         mapVC.endX = self.places[indexPath.row].x
         mapVC.endY = self.places[indexPath.row].y
-        guard let currentLocation = locationManager?.location else {return}
+        guard let currentLocation = locationManager.location else {return}
         mapVC.startX = "\(currentLocation.coordinate.longitude)"
         mapVC.startY = "\(currentLocation.coordinate.latitude)"
         mapVC.destinNameString = self.places[indexPath.row].name
         
-        self.locationManager?.delegate = mapVC
+        self.locationManager.delegate = mapVC
         self.navigationController?.pushViewController(mapVC, animated: true)
         tableView.cellForRow(at: indexPath)?.isSelected = false
         
