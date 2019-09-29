@@ -93,8 +93,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func updateDistance(current: CLLocation){
         let meter = current.distance(from: nodes[nextNode_Idx]);
         self.nextNodeDistanceTf.text = "\(Int(meter))m"
-        
-        
         if(meter < 10){
             self.nextNode_Idx+=1
             updateNextNode()
