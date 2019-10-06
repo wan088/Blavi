@@ -13,6 +13,7 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
     
     var places: [Place] = [Place]()
     var locationManager: CLLocationManager?
+    var disposeBag = DisposeBag()
     
     @IBOutlet var ResultTableView: UITableView!
     @IBOutlet var SearchTF: UITextField!
@@ -21,7 +22,7 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
         guard let text = SearchTF.text else{return}
         guard let location = locationManager?.location else {return}
         if(text == ""){return}
-        _ = rxSwiftGetLocations(keyword: text, location: location).observeOn(MainScheduler.instance).subscribe { (event) in
+        rxSwiftGetLocations(keyword: text, location: location).observeOn(MainScheduler.instance).subscribe { (event) in
             switch event{
             case let .next(data):
                 self.fillTableView(data: data);
@@ -30,8 +31,7 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
             case .completed:
                 break
             }
-        }
-        
+        }.disposed(by: disposeBag)
     }
 
     override func viewDidLoad() {
@@ -39,9 +39,12 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
         self.ResultTableView.dataSource = self
         self.ResultTableView.delegate = self
         SearchTF.delegate = self
-        self.SearchTF.rx.text.subscribe { (event) in
+        
+        self.SearchTF.rx.text.orEmpty.debounce(DispatchTimeInterval.milliseconds(500), scheduler: MainScheduler.instance).distinctUntilChanged().filter{ !$0.isEmpty
+            }.subscribe { (event) in
             switch event{
             case let .next(_):
+                print("search 요청")
                 self.SearchTouch(self)
             case let .error(error):
                 print(error.localizedDescription)
@@ -83,7 +86,7 @@ extension SearchViewController: UITableViewDataSource{
 }
 extension SearchViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! MapViewController
+        let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! CheckViewController
         mapVC.endX = self.places[indexPath.row].x
         mapVC.endY = self.places[indexPath.row].y
         guard let currentLocation = locationManager?.location else {return}
@@ -92,6 +95,7 @@ extension SearchViewController: UITableViewDelegate{
         mapVC.destinNameString = self.places[indexPath.row].name
         
         self.locationManager?.delegate = mapVC
+        //self.locationManager?.stopUpdatingHeading()
         self.navigationController?.pushViewController(mapVC, animated: true)
         tableView.cellForRow(at: indexPath)?.isSelected = false
         

@@ -11,13 +11,14 @@
 		CC9E129E233F6322000BAA06 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E129D233F6322000BAA06 /* Navigation.swift */; };
 		CC9E12A2233F6504000BAA06 /* MapApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E12A1233F6504000BAA06 /* MapApi.swift */; };
 		CCA9BDA9285EE2F242086CB8 /* Pods_Blavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAECE54937B06F071A2128F /* Pods_Blavi.framework */; };
+		CCAA93562347CD82003FB21C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA93552347CD82003FB21C /* MapViewController.swift */; };
 		CCE846A72327FC330089826F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A62327FC330089826F /* AppDelegate.swift */; };
 		CCE846A92327FC330089826F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A82327FC330089826F /* SearchViewController.swift */; };
 		CCE846AC2327FC330089826F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCE846AA2327FC330089826F /* Main.storyboard */; };
 		CCE846AF2327FC330089826F /* Blavi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCE846AD2327FC330089826F /* Blavi.xcdatamodeld */; };
 		CCE846B12327FC340089826F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCE846B02327FC340089826F /* Assets.xcassets */; };
 		CCE846B42327FC340089826F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCE846B22327FC340089826F /* LaunchScreen.storyboard */; };
-		CCEED6A4233B76D400404A72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEED6A3233B76D400404A72 /* MapViewController.swift */; };
+		CCEED6A4233B76D400404A72 /* CheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEED6A3233B76D400404A72 /* CheckViewController.swift */; };
 		CCF5F907233B87D900284AF4 /* FeatureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF5F906233B87D900284AF4 /* FeatureCollection.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +28,8 @@
 		CC4232A8232A330F004B97F0 /* Search_Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_Result.swift; sourceTree = "<group>"; };
 		CC9E129D233F6322000BAA06 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		CC9E12A1233F6504000BAA06 /* MapApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapApi.swift; sourceTree = "<group>"; };
-		CCE846A32327FC330089826F /* Blavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCAA93552347CD82003FB21C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CCE846A32327FC330089826F /* WanNavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WanNavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE846A62327FC330089826F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCE846A82327FC330089826F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		CCE846AB2327FC330089826F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,7 +37,7 @@
 		CCE846B02327FC340089826F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCE846B32327FC340089826F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCE846B52327FC340089826F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CCEED6A3233B76D400404A72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		CCEED6A3233B76D400404A72 /* CheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckViewController.swift; sourceTree = "<group>"; };
 		CCF5F906233B87D900284AF4 /* FeatureCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCollection.swift; sourceTree = "<group>"; };
 		F82215D32FA56CE47F26F2AA /* Pods-Blavi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blavi.release.xcconfig"; path = "Target Support Files/Pods-Blavi/Pods-Blavi.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +84,7 @@
 		CCE846A42327FC330089826F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CCE846A32327FC330089826F /* Blavi.app */,
+				CCE846A32327FC330089826F /* WanNavi.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,7 +95,8 @@
 				CC9E129C233F628D000BAA06 /* Util */,
 				CCE846A62327FC330089826F /* AppDelegate.swift */,
 				CCE846A82327FC330089826F /* SearchViewController.swift */,
-				CCEED6A3233B76D400404A72 /* MapViewController.swift */,
+				CCEED6A3233B76D400404A72 /* CheckViewController.swift */,
+				CCAA93552347CD82003FB21C /* MapViewController.swift */,
 				CCE846AA2327FC330089826F /* Main.storyboard */,
 				CCE846B02327FC340089826F /* Assets.xcassets */,
 				CCF5F906233B87D900284AF4 /* FeatureCollection.swift */,
@@ -133,7 +136,7 @@
 			);
 			name = Blavi;
 			productName = Blavi;
-			productReference = CCE846A32327FC330089826F /* Blavi.app */;
+			productReference = CCE846A32327FC330089826F /* WanNavi.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -233,8 +236,9 @@
 				CCE846A92327FC330089826F /* SearchViewController.swift in Sources */,
 				CC9E129E233F6322000BAA06 /* Navigation.swift in Sources */,
 				CCE846A72327FC330089826F /* AppDelegate.swift in Sources */,
+				CCAA93562347CD82003FB21C /* MapViewController.swift in Sources */,
 				CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */,
-				CCEED6A4233B76D400404A72 /* MapViewController.swift in Sources */,
+				CCEED6A4233B76D400404A72 /* CheckViewController.swift in Sources */,
 				CCE846AF2327FC330089826F /* Blavi.xcdatamodeld in Sources */,
 				CC9E12A2233F6504000BAA06 /* MapApi.swift in Sources */,
 			);
@@ -396,7 +400,7 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = net.wan.Blavi;
-				PRODUCT_NAME = Blavi;
+				PRODUCT_NAME = WanNavi;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -420,7 +424,7 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = net.wan.Blavi;
-				PRODUCT_NAME = Blavi;
+				PRODUCT_NAME = WanNavi;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

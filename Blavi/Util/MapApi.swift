@@ -44,7 +44,6 @@ func rxSwiftGetLocations(keyword: String, location:CLLocation) -> Observable<Dat
 // MARK:  보행자 경로 노드 가져오기
 func getNodeDatas(startX: String, startY: String, endX: String, endY: String,  completion: @escaping (Data)->Void){
     guard let url = URL(string: "https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1") else {return}
-    
     var request = URLRequest(url: url)
     request.addValue("application/json", forHTTPHeaderField: "accept")
     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -68,6 +67,7 @@ func getNodeDatas(startX: String, startY: String, endX: String, endY: String,  c
         }
     }.resume()
 }
+
 func rxSwiftGetNodes(startX: String, startY: String, endX: String, endY: String) -> Observable<Data>{
     return Observable.create { (observer) -> Disposable in
         getNodeDatas(startX: startX, startY: startY, endX: endX, endY: endY) { (data) in
