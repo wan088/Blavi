@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import RxSwift
+import AVFoundation
 class CheckViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var destinName: UILabel!
@@ -26,6 +27,7 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var nextNodeHeadingTf: UITextField!
     @IBOutlet weak var nextNodeDistanceTf: UITextField!
     
+    var synthe = AVSpeechSynthesizer()
     var currentLocation: CLLocation?
     var currentHeading: CLHeading?
     var nodes: [CLLocation] = [CLLocation]()
@@ -57,6 +59,7 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
         let ok = UIAlertAction(title: "시작", style: .default) { (action) in
             alert.dismiss(animated: true) {
                 self.startNavigation()
+                self.speakNow(string: "안내를 시작합니다")
             }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel){(_) in
@@ -176,6 +179,11 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
         let mvc = MapViewController()
         mvc.nodes = self.nodes
         self.show(mvc, sender: self)
+    }
+    func speakNow(string: String){
+        let utter = AVSpeechUtterance(string: string)
+        utter.rate = 0.4
+        utter.voice = AVSpeechSynthesisVoice(language: "ko-KR")
     }
     override func viewDidLoad() {
         super.viewDidLoad()

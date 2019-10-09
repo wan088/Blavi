@@ -69,7 +69,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" image="mic.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="SearchTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A8N-hk-IBx"/>
+                                    <action selector="micBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hRY-rI-vgb"/>
                                 </connections>
                             </button>
                         </subviews>

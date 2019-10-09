@@ -47,5 +47,9 @@
 	<string>백그라운드 위치정보를 사용합니다.</string>
 	<key>NMFClientId</key>
 	<string>xxp3z85qgy</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>마이크를 사용합니다</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>음성인식 합니다</string>
 </dict>
 </plist>
