@@ -43,11 +43,15 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
     
     var avss = AVSpeechSynthesizer()
     lazy var voiceNavi: Timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { (timer) in
+        guard let next = self.nextNodeHeadingTf.text else {return}
         DispatchQueue.main.async {
-            if(Double(self.currentHeadingTf.text!)! > 180){
-                self.say(str: "오른쪽")
-            }else{
+            var num = Double(next)!
+            if(num > 40 && num<100){
                 self.say(str: "왼쪽")
+            }else if(num < 320 && num>260){
+                self.say(str: "왼쪽")
+            }else if(num>=100 && num<=260){
+                self.say(str: "뒤쪽")
             }
         }
     }
@@ -89,7 +93,7 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
             let feats = featureCollection["features"] as! [[String: Any]]
         
             for tmp in feats{
-                let feat = tmp as! [String:Any]
+                var feat = tmp as! [String:Any]
                 let geo = feat["geometry"] as! [String: Any]
                 if geo["type"] as! String == "LineString"{
                     continue

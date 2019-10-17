@@ -195,6 +195,7 @@ extension SearchViewController: UITableViewDataSource{
         let place = self.places[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "placeCell") ?? UITableViewCell(style: .default, reuseIdentifier: "placeCell")
         cell.textLabel?.text = place.name
+        cell.accessibilityValue = place.name
         return cell
     }
 }

@@ -30,7 +30,7 @@ class MapViewController: UIViewController {
         var idx = 1
         var lates = [NMGLatLng]()
         for node in nodes{
-            var marker = NMFMarker()
+            let marker = NMFMarker()
             marker.position = NMGLatLng(lat: node.coordinate.latitude, lng: node.coordinate.longitude)
             marker.captionText = "\(idx)"
             idx+=1
