@@ -204,8 +204,12 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         initViews()
-        
-        
+    }
+    deinit {
+        print("뿌와앗")
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.voiceNavi.invalidate()
     }
 
 }

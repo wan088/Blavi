@@ -76,7 +76,7 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
         initSpeeches()
         bindTf()
         initLocationManager()
-        say(str: "검색을 원하면 아래로 쓸어내리세요")
+        //say(str: "검색을 원하면 아래로 쓸어내리세요")
         initRefresh()
     }
     func initRefresh(){
