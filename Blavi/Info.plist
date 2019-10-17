@@ -51,5 +51,10 @@
 	<string>마이크를 사용합니다</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>음성인식 합니다</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+		<string>audio</string>
+	</array>
 </dict>
 </plist>

@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import RxSwift
 import AVFoundation
+import CoreBluetooth
 class CheckViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var destinName: UILabel!
@@ -21,13 +22,12 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet var currentHeadingTf: UITextField!
     
     @IBOutlet var restNode: UITextField!
-    
+
     @IBOutlet var nextNodeX_Tf: UITextField!
     @IBOutlet var nextNodeY_Tf: UITextField!
     @IBOutlet var nextNodeHeadingTf: UITextField!
     @IBOutlet weak var nextNodeDistanceTf: UITextField!
     
-    var synthe = AVSpeechSynthesizer()
     var currentLocation: CLLocation?
     var currentHeading: CLHeading?
     var nodes: [CLLocation] = [CLLocation]()
@@ -41,6 +41,16 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
     var nextNode_Idx = 0
     var isStarted = false
     
+    var avss = AVSpeechSynthesizer()
+    lazy var voiceNavi: Timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { (timer) in
+        DispatchQueue.main.async {
+            if(Double(self.currentHeadingTf.text!)! > 180){
+                self.say(str: "오른쪽")
+            }else{
+                self.say(str: "왼쪽")
+            }
+        }
+    }
         
     @IBAction func findRoute(_ sender: Any) {
         self.nodes = [CLLocation]()
@@ -59,7 +69,11 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
         let ok = UIAlertAction(title: "시작", style: .default) { (action) in
             alert.dismiss(animated: true) {
                 self.startNavigation()
-                self.speakNow(string: "안내를 시작합니다")
+                
+                DispatchQueue.main.async {
+                    self.say(str: "안내를 시작합니다")
+                }
+                
             }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel){(_) in
@@ -72,7 +86,6 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
     }
     func initNodes(data: Data){
             let featureCollection = try! JSONSerialization.jsonObject(with: data, options: []) as! [String : Any]
-            print(featureCollection.description)
             let feats = featureCollection["features"] as! [[String: Any]]
         
             for tmp in feats{
@@ -93,6 +106,8 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
         updateNextNode()
         self.Status.textColor = .red
         self.Status.text = "동작중"
+        self.voiceNavi.fireDate = Date().addingTimeInterval(3)
+        self.voiceNavi.fire()
         
         self.Status_TV.text = "길찾기 시작... \n"
         self.isStarted = true
@@ -134,9 +149,9 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
         self.nextNodeX_Tf.text = ""
         self.nextNodeY_Tf.text = ""
         self.nextNodeHeadingTf.text = ""
+        self.voiceNavi.invalidate()
     }
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        print("asdf")
         self.currentHeading = newHeading
         self.currentHeadingTf.text = "\(newHeading.magneticHeading)"
         if self.isStarted{
@@ -147,7 +162,7 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
         guard let from = self.currentLocation else {return}
         let to = nodes[nextNode_Idx]
         let angle1_string = String(describing: (self.currentHeading?.magneticHeading)!)
-        print(angle1_string)
+        
         let angle1 = (Double(angle1_string))!
         let angle2 = getAngle(from: from, to: to)
         
@@ -180,10 +195,11 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
         mvc.nodes = self.nodes
         self.show(mvc, sender: self)
     }
-    func speakNow(string: String){
-        let utter = AVSpeechUtterance(string: string)
-        utter.rate = 0.4
-        utter.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+    func say(str: String){
+        var ut = AVSpeechUtterance(string: str)
+        ut.rate = 0.4
+        ut.voice = AVSpeechSynthesisVoice(language: "ko-KR")
+        self.avss.speak(ut)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
