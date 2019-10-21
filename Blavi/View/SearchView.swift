@@ -12,7 +12,8 @@ import RxCocoa
 import Speech
 import AVFoundation
 import AudioToolbox
-class SearchViewController: UIViewController, CLLocationManagerDelegate{
+class SearchView: UIViewController, CLLocationManagerDelegate{
+    
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
@@ -26,58 +27,65 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
             startRecording()
         }
     }
+    let searchViewModel = SearchViewModel()
     
     var avss = AVSpeechSynthesizer()
     var places: [Place] = [Place]()
     var locationManager: CLLocationManager?
     var disposeBag = DisposeBag()
     
-    @IBOutlet var ResultTableView: UITableView!
+    @IBOutlet weak var ResultTableView: UITableView!
     @IBOutlet var SearchTF: UITextField!
     @IBOutlet var SearchBtn: UIButton!
-    @IBAction func SearchTouch(_ sender: Any) {
-        guard let text = SearchTF.text else{return}
+    func doSearch(_ str: String){
         guard let location = locationManager?.location else {return}
-        if(text == ""){return}
-
-        rxSwiftGetLocations(keyword: text, location: location).observeOn(MainScheduler.instance).subscribe { (event) in
+        rxSwiftGetLocations(keyword: str, location: location).observeOn(MainScheduler.instance).subscribe { (event) in
             switch event{
             case let .next(data):
                 self.fillTableView(data: data);
             case let .error(error):
                 print(error.localizedDescription)
             case .completed:
-                
                 break
             }
         }.disposed(by: disposeBag)
-        
     }
+    // MARK:  Binding Task
     func bindTf(){
-        self.SearchTF.rx.text.orEmpty.debounce(DispatchTimeInterval.milliseconds(500), scheduler: MainScheduler.instance).distinctUntilChanged().filter{ !$0.isEmpty
-            }.subscribe { (event) in
-            switch event{
-            case let .next(_):
-                self.SearchTouch(self)
-            case let .error(error):
-                print(error.localizedDescription)
-            case .completed:
-                break
-            }
+        SearchTF.rx.text.orEmpty
+            .bind(to: self.searchViewModel.SearchBarRelay)
+            .disposed(by: disposeBag)
+        searchViewModel.SearchTextObservable
+            .subscribe(onNext: { [weak self] str in
+                self?.doSearch(str)
+            }).disposed(by: disposeBag)
+    }
+    func bindTableView(){
+        Observable.of(places)
+            .bind(to: ResultTableView.rx.items){tableView, row, element in
+            var cell = tableView.dequeueReusableCell(withIdentifier: "placeCell") ?? UITableViewCell()
+                cell.textLabel?.text = element.name
+                cell.accessibilityValue = element.name
+            return cell
         }
     }
-    
-
+    // MARK: View LifeCycle
+    override func viewWillAppear(_ animated: Bool) {
+        bindTf()
+        bindTableView()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.ResultTableView.dataSource = self
-        self.ResultTableView.delegate = self
+        //self.ResultTableView.dataSource = self
+        //self.ResultTableView.rx.setDataSource(self)
+        //self.ResultTableView.delegate = self
+        self.ResultTableView.rx.setDelegate(self)
         SearchTF.delegate = self
         initSpeeches()
-        bindTf()
         initLocationManager()
         //say(str: "검색을 원하면 아래로 쓸어내리세요")
         initRefresh()
+        
     }
     func initRefresh(){
         var refresh = UIRefreshControl()
@@ -151,7 +159,6 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
             if result != nil {
                 
                 self.SearchTF.text = result?.bestTranscription.formattedString
-                self.SearchTouch(self)
                 isFinal = (result?.isFinal)!
             }
             
@@ -181,44 +188,41 @@ class SearchViewController: UIViewController, CLLocationManagerDelegate{
         } catch {
             print("audioEngine couldn't start because of an error.")
         }
-        
-        
     }
 }
-extension SearchViewController: UITableViewDataSource{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(places.count)
-        return self.places.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let place = self.places[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "placeCell") ?? UITableViewCell(style: .default, reuseIdentifier: "placeCell")
-        cell.textLabel?.text = place.name
-        cell.accessibilityValue = place.name
-        return cell
-    }
+//extension SearchView: UITableViewDataSource{
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        print(places.count)
+//        return self.places.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let place = self.places[indexPath.row]
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "placeCell") ?? UITableViewCell(style: .default, reuseIdentifier: "placeCell")
+//        cell.textLabel?.text = place.name
+//        cell.accessibilityValue = place.name
+//        return cell
+//    }
+//}
+extension SearchView: UITableViewDelegate{
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! CheckViewController
+//        mapVC.endX = self.places[indexPath.row].x
+//        mapVC.endY = self.places[indexPath.row].y
+//        guard let currentLocation = locationManager?.location else {return}
+//        mapVC.startX = "\(currentLocation.coordinate.longitude)"
+//        mapVC.startY = "\(currentLocation.coordinate.latitude)"
+//        mapVC.destinNameString = self.places[indexPath.row].name
+//        
+//        self.locationManager?.delegate = mapVC
+//        //self.locationManager?.stopUpdatingHeading()
+//        self.navigationController?.pushViewController(mapVC, animated: true)
+//        tableView.cellForRow(at: indexPath)?.isSelected = false
+//        
+//    }
 }
-extension SearchViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! CheckViewController
-        mapVC.endX = self.places[indexPath.row].x
-        mapVC.endY = self.places[indexPath.row].y
-        guard let currentLocation = locationManager?.location else {return}
-        mapVC.startX = "\(currentLocation.coordinate.longitude)"
-        mapVC.startY = "\(currentLocation.coordinate.latitude)"
-        mapVC.destinNameString = self.places[indexPath.row].name
-        
-        self.locationManager?.delegate = mapVC
-        //self.locationManager?.stopUpdatingHeading()
-        self.navigationController?.pushViewController(mapVC, animated: true)
-        tableView.cellForRow(at: indexPath)?.isSelected = false
-        
-    }
-}
-extension SearchViewController: UITextFieldDelegate{
+extension SearchView: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.SearchTouch(self)
         textField.resignFirstResponder()
         return true
     }

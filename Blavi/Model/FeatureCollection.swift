@@ -49,6 +49,7 @@ enum Coordinate: Codable {
         if let x = try? container.decode([Double].self) {
             self = .doubleArray(x)
             return
+            
         }
         if let x = try? container.decode(Double.self) {
             self = .double(x)

@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC181CAA235D78890040B456 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC181CA9235D78890040B456 /* SearchViewModel.swift */; };
+		CC181CAC235DB3840040B456 /* ViewModelBindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC181CAB235DB3840040B456 /* ViewModelBindableType.swift */; };
 		CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4232A8232A330F004B97F0 /* Search_Result.swift */; };
 		CC9E129E233F6322000BAA06 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E129D233F6322000BAA06 /* Navigation.swift */; };
 		CC9E12A2233F6504000BAA06 /* MapApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E12A1233F6504000BAA06 /* MapApi.swift */; };
+		CCA562BD235C67C7001F35CC /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA562BC235C67C7001F35CC /* Place.swift */; };
 		CCA9BDA9285EE2F242086CB8 /* Pods_Blavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAECE54937B06F071A2128F /* Pods_Blavi.framework */; };
 		CCAA93562347CD82003FB21C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAA93552347CD82003FB21C /* MapViewController.swift */; };
 		CCE846A72327FC330089826F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A62327FC330089826F /* AppDelegate.swift */; };
-		CCE846A92327FC330089826F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A82327FC330089826F /* SearchViewController.swift */; };
+		CCE846A92327FC330089826F /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE846A82327FC330089826F /* SearchView.swift */; };
 		CCE846AC2327FC330089826F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCE846AA2327FC330089826F /* Main.storyboard */; };
 		CCE846AF2327FC330089826F /* Blavi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCE846AD2327FC330089826F /* Blavi.xcdatamodeld */; };
 		CCE846B12327FC340089826F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCE846B02327FC340089826F /* Assets.xcassets */; };
@@ -25,13 +28,17 @@
 /* Begin PBXFileReference section */
 		048CCC38A13C684518DEC77B /* Pods-Blavi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Blavi.debug.xcconfig"; path = "Target Support Files/Pods-Blavi/Pods-Blavi.debug.xcconfig"; sourceTree = "<group>"; };
 		3DAECE54937B06F071A2128F /* Pods_Blavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Blavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC181CA9235D78890040B456 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		CC181CAB235DB3840040B456 /* ViewModelBindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBindableType.swift; sourceTree = "<group>"; };
 		CC4232A8232A330F004B97F0 /* Search_Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_Result.swift; sourceTree = "<group>"; };
+		CC637B3D235C742F0089A1CC /* testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CC9E129D233F6322000BAA06 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		CC9E12A1233F6504000BAA06 /* MapApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapApi.swift; sourceTree = "<group>"; };
+		CCA562BC235C67C7001F35CC /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		CCAA93552347CD82003FB21C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CCE846A32327FC330089826F /* WanNavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WanNavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE846A62327FC330089826F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CCE846A82327FC330089826F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		CCE846A82327FC330089826F /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		CCE846AB2327FC330089826F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CCE846AE2327FC330089826F /* Blavi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blavi.xcdatamodel; sourceTree = "<group>"; };
 		CCE846B02327FC340089826F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,6 +78,44 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		CCA562B9235C6753001F35CC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CCE846A82327FC330089826F /* SearchView.swift */,
+				CCEED6A3233B76D400404A72 /* CheckViewController.swift */,
+				CCAA93552347CD82003FB21C /* MapViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CCA562BA235C6770001F35CC /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				CCE846B22327FC340089826F /* LaunchScreen.storyboard */,
+				CCE846AA2327FC330089826F /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		CCA562BE235C67F6001F35CC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CC181CA9235D78890040B456 /* SearchViewModel.swift */,
+				CC181CAB235DB3840040B456 /* ViewModelBindableType.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CCCCB5A0235C68CE00FE38CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CCF5F906233B87D900284AF4 /* FeatureCollection.swift */,
+				CC4232A8232A330F004B97F0 /* Search_Result.swift */,
+				CCA562BC235C67C7001F35CC /* Place.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		CCE8469A2327FC330089826F = {
 			isa = PBXGroup;
 			children = (
@@ -92,18 +137,16 @@
 		CCE846A52327FC330089826F /* Blavi */ = {
 			isa = PBXGroup;
 			children = (
+				CCCCB5A0235C68CE00FE38CD /* Model */,
+				CCA562B9235C6753001F35CC /* View */,
+				CCA562BE235C67F6001F35CC /* ViewModel */,
+				CCA562BA235C6770001F35CC /* Storyboard */,
 				CC9E129C233F628D000BAA06 /* Util */,
 				CCE846A62327FC330089826F /* AppDelegate.swift */,
-				CCE846A82327FC330089826F /* SearchViewController.swift */,
-				CCEED6A3233B76D400404A72 /* CheckViewController.swift */,
-				CCAA93552347CD82003FB21C /* MapViewController.swift */,
-				CCE846AA2327FC330089826F /* Main.storyboard */,
 				CCE846B02327FC340089826F /* Assets.xcassets */,
-				CCF5F906233B87D900284AF4 /* FeatureCollection.swift */,
-				CCE846B22327FC340089826F /* LaunchScreen.storyboard */,
 				CCE846B52327FC340089826F /* Info.plist */,
 				CCE846AD2327FC330089826F /* Blavi.xcdatamodeld */,
-				CC4232A8232A330F004B97F0 /* Search_Result.swift */,
+				CC637B3D235C742F0089A1CC /* testing.playground */,
 			);
 			path = Blavi;
 			sourceTree = "<group>";
@@ -232,15 +275,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC181CAA235D78890040B456 /* SearchViewModel.swift in Sources */,
 				CCF5F907233B87D900284AF4 /* FeatureCollection.swift in Sources */,
-				CCE846A92327FC330089826F /* SearchViewController.swift in Sources */,
+				CCE846A92327FC330089826F /* SearchView.swift in Sources */,
 				CC9E129E233F6322000BAA06 /* Navigation.swift in Sources */,
 				CCE846A72327FC330089826F /* AppDelegate.swift in Sources */,
 				CCAA93562347CD82003FB21C /* MapViewController.swift in Sources */,
 				CC4232A9232A330F004B97F0 /* Search_Result.swift in Sources */,
 				CCEED6A4233B76D400404A72 /* CheckViewController.swift in Sources */,
 				CCE846AF2327FC330089826F /* Blavi.xcdatamodeld in Sources */,
+				CC181CAC235DB3840040B456 /* ViewModelBindableType.swift in Sources */,
 				CC9E12A2233F6504000BAA06 /* MapApi.swift in Sources */,
+				CCA562BD235C67C7001F35CC /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

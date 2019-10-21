@@ -11,7 +11,7 @@
         <!--BLAVI-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SearchViewController" customModule="WanNavi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SearchView" customModule="WanNavi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,7 +90,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="BLAVI" id="Rlq-1o-jx3"/>
                     <connections>
-                        <outlet property="ResultTableView" destination="BeW-UE-0wB" id="Z4y-gj-VUL"/>
+                        <outlet property="ResultTableView" destination="BeW-UE-0wB" id="0Vo-S8-dPc"/>
                         <outlet property="SearchBtn" destination="2Cm-za-eSy" id="JLi-Be-4Qf"/>
                         <outlet property="SearchTF" destination="7pg-ws-wVM" id="CLd-JM-WCw"/>
                     </connections>

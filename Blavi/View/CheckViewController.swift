@@ -44,7 +44,9 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
     var avss = AVSpeechSynthesizer()
     lazy var voiceNavi: Timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { (timer) in
         guard let next = self.nextNodeHeadingTf.text else {return}
+        if next == "" {return}
         DispatchQueue.main.async {
+            
             var num = Double(next)!
             if(num > 40 && num<100){
                 self.say(str: "왼쪽")
@@ -67,8 +69,9 @@ class CheckViewController: UIViewController, CLLocationManagerDelegate {
             case let .completed:
                 break
             }
+
         }
-        
+    
         let alert = UIAlertController(title: "길 찾기 시작", message: "해당 경로로 길찾기를 실행합니다.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "시작", style: .default) { (action) in
             alert.dismiss(animated: true) {
